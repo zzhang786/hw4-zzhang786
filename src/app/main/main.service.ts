@@ -428,6 +428,12 @@ export class MainService {
 
   addFollowingByUsername(username:string):void{
     let addFollowingId=this.getUserIDByUsername(username);
+    let currentID = this.getUserIDByUsername(this.getCurrentUserName());
+    if(currentID==addFollowingId){
+      return;
+    }
+
+
     var relationStr = localStorage.getItem("relationships");
     if(relationStr==null||relationStr==""){
       return;
@@ -437,11 +443,14 @@ export class MainService {
     var res:any[]=[];
     for(var i = 0; i < relationJSON.length; i++){
       var singleJSON = relationJSON[i];
-
       for(var key in singleJSON){
         if(key==this.getUserIDByUsername(this.getCurrentUserName())
         ){
-
+          for(var j = 0; j < singleJSON[key].length; j++){
+              if(singleJSON[key][j] == addFollowingId){
+                return;
+              }
+          }
           singleJSON[key].push(addFollowingId);
           localStorage.setItem("relationships",JSON.stringify(relationJSON));
           return;

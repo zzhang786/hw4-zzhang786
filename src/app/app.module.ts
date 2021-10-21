@@ -14,7 +14,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
 import {HttpClientModule} from "@angular/common/http";
-
+import {HashLocationStrategy,LocationStrategy} from "@angular/common";
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +36,7 @@ import {HttpClientModule} from "@angular/common/http";
     MatDividerModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass:HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

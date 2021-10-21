@@ -25,7 +25,7 @@ export class MainPageComponent implements OnInit {
     )
     if(this.service.getCurrentUserName()==null ||
             this.service.getCurrentUserName()=="" ){
-            this.router.navigateByUrl("main")
+            this.router.navigateByUrl("")
             return;
     }
     this.status = this.service.getStatusByUsername(this.service.getCurrentUserName());

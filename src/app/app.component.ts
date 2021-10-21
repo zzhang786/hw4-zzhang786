@@ -72,7 +72,7 @@ export class AppComponent {
 
   logOut():void{
     this.service.logOut();
-    this.myRouter.navigateByUrl("main");
+    this.myRouter.navigateByUrl("");
   }
   unfollow(id:string):void{
     this.followingList=this.service.deleteRelationByFollowingId(id);

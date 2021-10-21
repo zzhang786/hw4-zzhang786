@@ -80,7 +80,7 @@ export class ProfilePageComponent implements OnInit {
 
     this.txtName=this.service.getCurrentUserName();
     if(this.txtName==null||this.txtName==""){
-      this.router.navigateByUrl("main");
+      this.router.navigateByUrl("");
       return;
     }
 

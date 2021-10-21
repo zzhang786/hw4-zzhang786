@@ -5,7 +5,7 @@ import {MainPageComponent} from "./main-page/main-page.component";
 import {ProfilePageComponent} from "./profile-page/profile-page.component";
 
 const routes: Routes = [
-    {path:'main',component:MainComponent},
+    {path:'',component:MainComponent},
     {path:'main_page',component:MainPageComponent},
     {path: 'profile_page',component:ProfilePageComponent}];
 
