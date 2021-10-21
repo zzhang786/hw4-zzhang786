@@ -1,0 +1,58 @@
+<mat-toolbar>
+    Welcome to My WorldApp™
+    <div>
+        <img class="avatar mat-elevation-z8" src="https://vectorified.com/images/chat-app-icon-22.png" (click)="changeSideBar()"/>
+    </div>
+</mat-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" [(opened)]="openFlag" class="mat-elevation-z8">
+
+        <button mat-button class="menu-button" (click)="toMain()">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+        </button>
+        <button mat-button class="menu-button" (click)="toMainPage()">
+            <mat-icon>person</mat-icon>
+            <span>Main Page</span>
+        </button>
+        <button mat-button class="menu-button" (click)="toProfilePage()">
+            <mat-icon>info</mat-icon>
+            <span>Profile</span>
+        </button>
+        <button mat-button class="menu-button" (click)="logOut()">
+            <mat-icon>home</mat-icon>
+            <span>LogOut</span>
+        </button>
+        <img class="avatar mat-elevation-z8" src="https://vectorified.com/images/chat-app-icon-22.png" />
+
+        <h4 class="name" id="name">{{currentUserInfo.username}}</h4>
+        <h4 class="name" >{{currentUserInfo.status}}</h4>
+        <!--<p class="designation">Hello</p >-->
+
+        <div *ngIf="showIfAddFollowing">
+            <input placeholder="Add Following Friends" [(ngModel)]="newFollowingUserNameToAdd">
+            <!--<button mat-button class="menu-button" (click)="addFollowing()">
+                Add
+            </button>-->
+            <button type="button" class="btn btn-info" (click)="addFollowing()">Add</button>
+        </div>
+        <mat-divider></mat-divider>
+
+        <div *ngFor="let elem of followingList">
+            <img class="avatar mat-elevation-z8" src={{elem.picture}} (click)="showFollowingPage(elem.id)"/>
+            <button mat-button class="menu-button" (click)="unfollow(elem.id)">
+                <mat-icon>person</mat-icon>
+                <span>unfollow</span>
+            </button>
+            <h4 class="name" >{{elem.username}}</h4>
+            <h4 class="name" >{{elem.status}}</h4>
+        </div>
+
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="content"> add scroll bar
+
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,87 @@
+<!--
+<form [formGroup]="mytest" (ngSubmit)="onSubmit(mytest.value)">
+
+    <div>
+        <label>test</label>
+        <input formControlName="user">
+        &lt;!&ndash;<div [hidden]="regForm.get('user')">
+            <p [hidden]="!regForm.hasError('required','user')">user is needed</p >
+        </div>&ndash;&gt;
+    </div>
+    <input type="submit" value="submit">
+</form>-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta author="Zan Zhang">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+</head>
+<body>
+<img src={{getImgPath}}>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" id = "myForm">
+    <div>
+        <h3>Changing Your New Profile Picture</h3>
+        <img src="assets/post2.jpeg" id="newImg">
+        <form action="/action_page.php">
+            <input type="file" id="myFile"  name="filename">
+        </form>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="col-4">Attributes</th>
+            <th class="col-4">Value</th>
+            <th class="col-4">Warning</th>
+        </tr>
+        </thead>
+        <tbody>
+       <!-- <tr>
+            <td class = "col-4">Account Name</td>
+            <td class = "col-4"><input type="text" id="txtName" formControlName="txtName" [(ngModel)]="txtName"></td>
+            <td class = "col-4"> <p [hidden]="!myForm.hasError('required','txtName')">user txtName is needed</p></td>
+        </tr>-->
+        <tr>
+            <td class = "col-4">Display Name</td>
+            <td class = "col-4"><input type="text" id="displayName" formControlName="displayName" [(ngModel)]="displayName"></td>
+            <td class = "col-4"> <p [hidden]="!myForm.hasError('required','displayName')">user DisplayNmae is needed</p></td>
+        </tr>
+
+        <tr>
+            <td class = "col-4">Email Address</td>
+            <td class = "col-4"><input type="text" id="emailAdd" placeholder="abc@rice.edu" formControlName="emailAdd" [(ngModel)]="emailAdd"></td>
+            <td class="col-4 errorInfo"> <span [hidden]="!myForm.hasError('validEmail','emailAdd')"></span>{{myForm.getError('validEmail','emailAdd')?.info}} </td>
+        </tr>
+        <tr>
+            <td class = "col-4">Phone</td>
+            <td class = "col-4"><input type="tel" id="txtPhone" placeholder="4792255494" formControlName="txtPhone" [(ngModel)]="txtPhone"></td>
+            <td class="col-4 errorInfo"> <span [hidden]="!myForm.hasError('validNumber','txtPhone')"></span>{{myForm.getError('validNumber','txtPhone')?.info}} </td>
+        </tr>
+        <!--<tr>
+            <td class = "col-4">Birthday</td>
+            <td class = "col-4"><input type="date" id="birth" formControlName="birth" [(ngModel)]="birth"></td>
+            <td class = "col-4"> <p [hidden]="!myForm.hasError('required','birth')">user birth is needed</p> </td >
+        </tr>-->
+        <tr>
+            <td class = "col-4">Zip Code</td>
+            <td class = "col-4"><input type="text" id="txtZipcode" placeholder="77007" formControlName="txtZipcode" [(ngModel)]="txtZipcode"></td>
+            <td class="col-4 errorInfo"> <p [hidden]="!myForm.hasError('minlength','txtZipcode')&&!myForm.hasError('maxlength','txtZipcode')">zipcode is invalid</p > </td> </tr>
+        <tr>
+            <td class = "col-4">Password</td>
+            <td class = "col-4"><input type="password" id="pwd" placeholder="123456" formControlName="pwd" [(ngModel)]="pwd"></td>
+            <td class = "col-4"> <p [hidden]="!myForm.hasError('required','pwd')">user pwd is needed</p></td >
+        </tr>
+        <tr>
+            <td class = "col-4">Verify Password</td>
+            <td class = "col-4"><input type="password" id="pwd2" placeholder="123456" formControlName="pwd2"[(ngModel)]="pwd2"></td>
+            <td class="col-4 errorInfo"> <p *ngIf="myForm.hasError('samePwd','')">{{myForm.getError('samePwd','')?.info}}</p > </td></tr>
+
+        </tbody>
+    </table>
+    <div>
+        <button type="submit" class="btn btn-success" id="submitBtn" style="float: right" >Submit</button>
+    </div>
+
+</form>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta author="Zan Zhang">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+</head>
+<body>
+        <form [formGroup]="myLoginForm" (ngSubmit)="onLogin(myLoginForm.value)" id = "myLoginForm">
+            <table class="table table-striped" id = left style="float: left">
+                <thead>
+                <tr>
+                    <th class="col-4">Attributes</th>
+                    <th class="col-4">Value</th>
+                    <th class="col-4">Warning</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class = "col-4">Account Name</td>
+                    <td class = "col-4"><input type="text" id="myName" formControlName="myName"></td>
+                    <td class = "col-4"> <p [hidden]="!myLoginForm.hasError('required','myName')">user Name is needed</p></td>
+                </tr>
+                <tr>
+                    <td class = "col-4">User Password</td>
+                    <td class = "col-4"><input type="password" id="myPassword" formControlName="myPassword"></td>
+                    <td class = "col-4"> <p [hidden]="!myLoginForm.hasError('required','myPassword')">user Password is needed</p></td>
+                </tr>
+                </tbody>
+            </table>
+            <div>
+                <button type="login" class="btn btn-success" id="loginBtn" style="float: right">Submit</button>
+            </div>
+        </form>
+    <div class="column">
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" id = "myForm">
+            <table class="table table-striped" id="right" style="float: right">
+                <thead>
+                <tr>
+                    <th class="col-4">Attributes</th>
+                    <th class="col-4">Value</th>
+                    <th class="col-4">Warning</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class = "col-4">Account Name</td>
+                    <td class = "col-4"><input type="text" id="txtName" formControlName="txtName"></td>
+                    <td class="col-4 errorInfo"> <p [hidden]="!myForm.hasError('validAccountName','txtName')
+                    &&!myForm.hasError('required','txtName')">{{myForm.getError('validAccountName','txtName')?.info}} </p> </td>
+                </tr>
+                <tr>
+                    <td class = "col-4">Display Name</td>
+                    <td class = "col-4"><input type="text" id="displayName" formControlName="displayName"></td>
+                    <td class = "col-4"> <p [hidden]="!myForm.hasError('required','displayName')">user DisplayName is needed</p></td>
+                </tr>
+                <tr>
+                    <td class = "col-4">Email Address</td>
+                    <td class = "col-4"><input type="text" id="emailAdd" placeholder="abc@rice.edu" formControlName="emailAdd"></td>
+                    <td class="col-4 errorInfo"> <p [hidden]="!myForm.hasError('validEmail','emailAdd')
+                    &&!myForm.hasError('required','emailAdd')">{{myForm.getError('validEmail','emailAdd')?.info}} </p> </td>
+                </tr>
+                <tr>
+                    <td class = "col-4">Phone</td>
+                    <td class = "col-4"><input type="tel" id="txtPhone" placeholder="4792255494" formControlName="txtPhone"></td>
+                    <td class="col-4 errorInfo"> <p [hidden]="!myForm.hasError('validNumber','txtPhone')
+                   &&!myForm.hasError('maxlength','txtPhone')
+                   &&!myForm.hasError('required','txtPhone')">please input a valid numbers</p> </td>
+                </tr>
+                <tr>
+                    <td class = "col-4">Birthday</td>
+                    <td class = "col-4"><input type="date" id="birth" formControlName="birth"></td>
+                    <td class="col-4 errorInfo"> <p [hidden]="!myForm.hasError('checkAdult','birth')
+                    &&!myForm.hasError('required','birth')">{{myForm.getError('checkAdult','birth')?.info}} </p > </td>
+                </tr>
+                <tr>
+                    <td class = "col-4">Zip Code</td>
+                    <td class = "col-4"><input type="text" id="txtZipcode" placeholder="77007"
+                                               formControlName="txtZipcode"></td>
+                    <td class="col-4 errorInfo"> <p [hidden]="!myForm.hasError('minlength','txtZipcode')
+                    &&!myForm.hasError('maxlength','txtZipcode')">zipcode is invalid</p > </td>
+                </tr>
+
+                <tr>
+                    <td class = "col-4">Password</td>
+                    <td class = "col-4"><input type="password" id="pwd" placeholder="123456" formControlName="pwd"></td>
+                    <td class = "col-4"> <p [hidden]="!myForm.hasError('required','pwd')">user pwd is needed</p></td >
+                </tr>
+                <tr>
+                    <td class = "col-4">Verify Password</td>
+                    <td class = "col-4"><input type="password" id="pwd2" placeholder="123456" formControlName="pwd2"></td>
+                    <td class="col-4 errorInfo"> <p *ngIf="myForm.hasError('samePwd','')">{{myForm.getError('samePwd','')?.info}}</p > </td>
+
+                </tr>
+                </tbody>
+            </table>
+            <div>
+                <button type="submit" class="btn btn-success" id="submitBtn" style="float: right">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+

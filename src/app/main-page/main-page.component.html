@@ -1,0 +1,171 @@
+<p>main-page works!</p>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta author="Zan Zhang">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+</head>
+<body class = "page1">
+<div class = "all">
+<div class="row">
+    <div class="column">
+        <div>
+            <form action="/action_page.php">
+                <input type="file" id="myFile"  name="filename">
+            </form>
+        </div>
+        <div>
+            <input type="button" class="btn btn-success" value = "Change your Status:" (click)="changeStatus()">
+            <input type="text" name="comment_author" value="" tabindex="1" required="required"
+                   [(ngModel)]="status">
+        </div>
+        <div>
+            <input type="button" class="btn btn-success" value = "Search" (click)="searchByWords()">
+            <input type="text" name="comment_author" value="" tabindex="1" required="required"
+                   [(ngModel)]="searchWords">
+        </div>
+        <div id="respond"><br>
+            <form action="commentLater.php" method="post" id="commentform">
+                <label for="comment_author" >Enter your Title:</label>
+                <input type="text" name="comment_author" id="comment_author" value="" tabindex="1" required="required"
+                [(ngModel)]="title">
+                <br>
+                <label for="comment" class="required">
+                    <br>
+                    Enter your content: </label>
+                <br>
+                <textarea name="comment" id="comment" rows="10" tabindex="4" required="required"
+                [(ngModel)]="content"></textarea>
+                <br>
+                <input type="hidden" name="comment_post_ID" value="1" id="comment_post_ID" />
+                <input name="submit" type="button" value="Post" (click)="addNewPost()"/>
+                <input name="submit" type="button" value="cancel"/>
+            </form>
+        </div>
+    </div>
+    <div class="column">
+        <table class="table table-striped" id="follower_list">
+            <tr>
+                <th class="col-4">Followers</th>
+            </tr>
+            <tr *ngFor="let elem of followerList">
+                <td class = "col-4">{{elem.username}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+                <div *ngFor="let elemPost of showPosts" class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <p class="user_name">{{elemPost.username}}</p>
+                        <p class="user_name">{{elemPost.time}}</p>
+                        <img class="post_img" src={{elemPost.imgSrc}} alt="Thumbnail [100%x225]"  data-holder-rendered="true">
+                        <div class="card-body">
+                            <p class="title">{{elemPost.title}}</p>
+                            <p class="card-text">{{elemPost.body}}</p >
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-success btn-outline-secondary">Comment</button>
+                                    <button type="button" class="btn btn-sm btn-success btn-outline-secondary">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+<!--<div>
+<table class="table" style="width:100%">
+    <p id="articles"><b>User Articles</b></p>
+    <tr>
+        <td><em><b>Pink Aesthetic</b></em></td>
+        <td><em><b>Hot-Air Balloon</b></em></td>
+    </tr>
+    <tr>
+        <td> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed ullamcorper morbi tincidunt ornare massa eget egestas purus viverra. Consequat semper viverra nam libero justo laoreet sit amet cursus. Sit amet facilisis magna etiam tempor orci. Volutpat ac tincidunt vitae semper quis. Ut sem viverra aliquet eget sit amet. Lectus arcu bibendum at varius vel pharetra vel. Et tortor at risus viverra. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper. Cursus mattis molestie a iaculis at erat pellentesque adipiscing commodo. Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Scelerisque fermentum dui faucibus in ornare quam viverra orci sagittis.
+        </td>
+        <td> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed ullamcorper morbi tincidunt ornare massa eget egestas purus viverra. Consequat semper viverra nam libero justo laoreet sit amet cursus. Sit amet facilisis magna etiam tempor orci. Volutpat ac tincidunt vitae semper quis. Ut sem viverra aliquet eget sit amet. Lectus arcu bibendum at varius vel pharetra vel. Et tortor at risus viverra. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper. Cursus mattis molestie a iaculis at erat pellentesque adipiscing commodo. Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Scelerisque fermentum dui faucibus in ornare quam viverra orci sagittis.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="card" id="1">
+                <img class="mySlides" src="assets/post2.jpeg" alt="Pink" style="width:75%; height:40%" >
+         </div>
+        </td>
+        <td>
+            <div class="card" id="2">
+                <img class="mySlides" src="assets/post6.jpeg" alt="Hot-Air Balloon" style="width:75%; height:40%" >
+         </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class = 'myContainer'>
+                <input type="button" value="Edit" name="5" onclick="process_myBtn(this)">
+                <input type="button" value="Comment" name="1" onclick="process_myBtn(this)">
+                <p>&nbsp;&nbsp;&nbsp;</p>
+            </div>
+        </td>
+        <td>
+            <div class = 'myContainer'>
+                <input type="button" value="Edit" name="5" onclick="process_myBtn(this)">
+                <input type="button" value="Comment" name="2" onclick="process_myBtn(this)">
+                <p>&nbsp;&nbsp;&nbsp;</p>
+            </div>
+        </td>
+    </tr>
+
+    <tr class = "spaceUnder">
+        <td><em><b>Beautiful Blooming Flowers</b></em></td>
+        <td><em><b>Nature Scenery</b></em></td>
+    </tr>
+    <tr>
+        <td> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed ullamcorper morbi tincidunt ornare massa eget egestas purus viverra. Consequat semper viverra nam libero justo laoreet sit amet cursus. Sit amet facilisis magna etiam tempor orci. Volutpat ac tincidunt vitae semper quis. Ut sem viverra aliquet eget sit amet. Lectus arcu bibendum at varius vel pharetra vel. Et tortor at risus viverra. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper. Cursus mattis molestie a iaculis at erat pellentesque adipiscing commodo. Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Scelerisque fermentum dui faucibus in ornare quam viverra orci sagittis.
+        </td>
+        <td> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed ullamcorper morbi tincidunt ornare massa eget egestas purus viverra. Consequat semper viverra nam libero justo laoreet sit amet cursus. Sit amet facilisis magna etiam tempor orci. Volutpat ac tincidunt vitae semper quis. Ut sem viverra aliquet eget sit amet. Lectus arcu bibendum at varius vel pharetra vel. Et tortor at risus viverra. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper. Cursus mattis molestie a iaculis at erat pellentesque adipiscing commodo. Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Scelerisque fermentum dui faucibus in ornare quam viverra orci sagittis.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="card" id="5">
+                <img class="mySlides" src="assets/post3.jpeg" alt="Flower" style="width:75%; height:45%" >
+            </div>
+        </td>
+        <td>
+            <div class="card" id="6">
+                <img class="mySlides" src="assets/post7.jpeg" alt="Mountain" style="width:80%; height:55%" >
+           </div>
+        </td>
+    <tr>
+        <td>
+            <div class = 'myContainer'>
+                <input type="button" value="Edit" name="5" onclick="process_myBtn(this)">
+                <input type="button" value="Comment" name="5" onclick="process_myBtn(this)">
+                <p>&nbsp;&nbsp;&nbsp;</p>
+            </div>
+        </td>
+
+    <td>
+            <div class = 'myContainer'>
+                <input type="button" value="Edit" name="5" onclick="process_myBtn(this)">
+                <input type="button" value="Comment" name="6" onclick="process_myBtn(this)">
+                <p>&nbsp;&nbsp;&nbsp;</p>
+            </div>
+        </td>
+    </tr>
+</table>
+    </div>-->
+</div>
+</body>
+
+
+<script src="main.js"></script>
+
+
+</html>
