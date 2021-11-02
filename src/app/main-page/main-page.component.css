@@ -1,5 +1,6 @@
 body,html{
     height: calc(100vh - 98px);
+
 }
 
 * {
@@ -36,7 +37,7 @@ div.all{
     margin-left: 10%;
 
     /*overflow: scroll;*/
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .post_img{
     width: 150px;
@@ -57,4 +58,8 @@ div.all{
 .container{
     display: flex;
     flex-direction: column-reverse;
+}
+.commentDiv{
+    overflow-y: auto;
+    height: 100px;
 }

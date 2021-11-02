@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {MainService} from "../main/main.service";
-
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
@@ -10,7 +9,6 @@ import {MainService} from "../main/main.service";
 })
 export class ProfilePageComponent implements OnInit {
   getImgPath: string = "";
-
   txtName:string | null = "txtName";
   displayName:string = "displayName";
   emailAdd:string = "txtName";
@@ -19,15 +17,9 @@ export class ProfilePageComponent implements OnInit {
   txtZipcode:string = "txtName";
   pwd:string = "pwd";
   pwd2:string = "pwd2";
-
-
   myForm:FormGroup;
   myLoginForm:FormGroup;
   constructor(public router: Router, public service: MainService,) {
-
-
-
-
     let fb = new FormBuilder(); // for building formGroup
     this.myLoginForm =fb.group({
       myName: ['', { //for FormControl
@@ -77,13 +69,11 @@ export class ProfilePageComponent implements OnInit {
         {
           validators:[this.samePwd]}
     )
-
     this.txtName=this.service.getCurrentUserName();
     if(this.txtName==null||this.txtName==""){
       this.router.navigateByUrl("");
       return;
     }
-
     if (typeof this.txtName === "string") {
       let userStr=this.service.getUserInfoByUserID(this.service.getUserIDByUsername(this.txtName));
       let userJson=JSON.parse(userStr);
@@ -95,7 +85,6 @@ export class ProfilePageComponent implements OnInit {
       this.pwd=userJson.password;
       this.pwd2=userJson.password;
      // this.birth="1998-8-1";//userJson.birth;
-
 /*
 
       this.getImgPath = JSON.parse(<string>localStorage.getItem(this.txtName)).picture;
@@ -107,12 +96,9 @@ export class ProfilePageComponent implements OnInit {
       this.txtZipcode = JSON.parse(<string>localStorage.getItem(this.txtName)).address.zipcode;
       this.pwd = JSON.parse(<string>localStorage.getItem(this.txtName)).password;
 */
-
-
       console.log(this.getImgPath);
     }
   }
-
   ngOnInit(): void {
   }
  /* onSubmit(value:any):void{
@@ -121,8 +107,7 @@ export class ProfilePageComponent implements OnInit {
     this.service.saveInfo(value);
     this.router.navigateByUrl("main_page");
   }*/
-
-  checkLogin(userName:string,Password:string):boolean{
+/*  checkLogin(userName:string,Password:string):boolean{
     var myUserString = localStorage.getItem(userName);
     if(myUserString == null) return false;
     if(JSON.parse(<string>myUserString).password == Password){
@@ -130,9 +115,9 @@ export class ProfilePageComponent implements OnInit {
     } else {
       return false;
     }
-  }
-  onLogin(value:any):void{
-    /*        console.log(value);*/
+  }*/
+ /* onLogin(value:any):void{
+    /!*        console.log(value);*!/
     var userName = value.myName;
     var Password = value.myPassword;
     console.log(userName);
@@ -144,13 +129,11 @@ export class ProfilePageComponent implements OnInit {
     }else{
       console.log("error!")
     }
-
-  }
-  public workSpace():void{
+  }*/
+/*  public workSpace():void{
     this.router.navigateByUrl("main_page");
-  }
-
-  onSubmit(formValue:any):void{
+  }*/
+  onSubmit(formValue:any):boolean{
    /* if(this.pwd!=this.pwd2){
       this.pwd="";
       this.pwd2="";
@@ -158,7 +141,9 @@ export class ProfilePageComponent implements OnInit {
       return;
     }*/
     if(!this.myForm.valid){
-      return;
+      console.log("*****************",this.myForm.value);
+      console.log("========",this.myForm.errors);
+      return false;
     }
     let value:any={};
     value.name=this.displayName;
@@ -167,13 +152,11 @@ export class ProfilePageComponent implements OnInit {
     value.zipcode=this.txtZipcode;
     value.password=this.pwd;
 
-    console.log("zipcode**********",value.zipcode);
     alert("modify success!");
     this.service.modifyUser(value);
+    return true;
   }
-
   samePwd(controlGroup: FormGroup): any {
-
     // @ts-ignore
     let pw2 = controlGroup.get('pwd').value;
     // @ts-ignore
@@ -185,7 +168,6 @@ export class ProfilePageComponent implements OnInit {
       return {samePwd: {info: 'Password do NOT match!'}};
     }
   }
-
   validNumber(control: FormControl):any{
     let value=control.value;
 
@@ -196,7 +178,6 @@ export class ProfilePageComponent implements OnInit {
       return null;
     }
   }
-
   validEmail(control: FormControl):any{
     let value=control.value;
     if(value==null||value==""){
@@ -209,5 +190,4 @@ export class ProfilePageComponent implements OnInit {
       return null;
     }
   }
-
 }

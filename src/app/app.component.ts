@@ -18,7 +18,8 @@ export class AppComponent {
   constructor(private myRouter:Router, private service: MainService) {
     this.service.eventChangeStatus.subscribe(
         (status:string)=>{
-          this.currentUserInfo = JSON.parse(this.service.getUserInfoByUserID(this.service.getUserIDByUsername(this.service.getCurrentUserName())));
+          this.currentUserInfo = JSON.parse(this.service.getUserInfoByUserID(
+              this.service.getUserIDByUsername(this.service.getCurrentUserName())));
         }
     );
     this.service.userChangeEvent.subscribe(
@@ -57,13 +58,13 @@ export class AppComponent {
     this.openFlag = !this.openFlag;
   }
   toMain():void{
-    this.myRouter.navigateByUrl("main");
+    this.myRouter.navigateByUrl('');
   }
   toMainPage():void{
-    this.myRouter.navigateByUrl("main_page");
+    this.myRouter.navigateByUrl('main_page');
   }
   toProfilePage():void{
-    this.myRouter.navigateByUrl("profile_page");
+    this.myRouter.navigateByUrl('profile_page');
   }
 
   showFollowingPage(id:string):void{
@@ -79,14 +80,17 @@ export class AppComponent {
     /*this.followingList= this.service.getfollowingByUserID(this.service.getUserIDByUsername(
         this.service.getCurrentUserName()));*/
 
-    console.log("following list",this.followingList);
-
-
+    this.service.relationChangeEvent.emit(this.service.getCurrentUserName());
   }
   addFollowing(){
-    this.service.addFollowingByUsername(this.newFollowingUserNameToAdd);
+    let legalUsername=this.service.addFollowingByUsername(this.newFollowingUserNameToAdd);
+    if(legalUsername==false){
+      alert("your input is illegal. Please check it!");
+      return;
+    }
     this.followingList= this.service.getfollowingByUserID(this.service.getUserIDByUsername(
         this.service.getCurrentUserName()));
+    this.service.relationChangeEvent.emit(this.service.getCurrentUserName());
   }
 
 }

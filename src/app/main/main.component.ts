@@ -68,32 +68,38 @@ myLoginForm:FormGroup;
   }
   ngOnInit(): void {
   }
-  onSubmit(value:any):void{
+  onSubmit(value:any):boolean{
       console.log(value);
       if(!this.myForm.valid){
-          return;
+          console.log("!!!!!!!",this.myForm.errors)
+          return false;
       }
-      console.log(value.user);
+      //console.log(value.user);
+
       this.service.saveInfo(value);
       this.router.navigateByUrl("main_page");
+      return true;
     }
 
-    onLogin(value:any):void{
-/*        console.log(value);*/
+    onLogin(value:any):boolean{
+    console.log(":::::::::: ", value);
         var userName = value.myName;
         var Password = value.myPassword;
+        console.log("userName::::::: ", userName);
+        console.log("password::::::: ", Password);
 
         if(this.service.checkLogin(userName,Password)){
+
             this.service.changeCurrentUser(userName);
             this.router.navigateByUrl("main_page");
+            return true;
         }else{
-            console.log("error!")
+            return false;
         }
-
     }
-public workSpace():void{
+/*public workSpace():void{
     this.router.navigateByUrl("main_page");
-}
+}*/
 
     validNumber(control: FormControl):any{
         let value=control.value;
@@ -105,7 +111,6 @@ public workSpace():void{
             return null;
         }
     }
-
     validAccountName(control: FormControl):any{
         let value=control.value;
 
