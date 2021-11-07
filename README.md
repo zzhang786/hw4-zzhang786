@@ -1,5 +1,5 @@
 {
 "netid": "zz93",
-"frontend": "tian-tian.surge.sh"
+"frontend": "https://tiantian.surge.sh/"
 }
 
