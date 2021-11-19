@@ -158,7 +158,9 @@ export class MainService {
     localStorage.setItem("users",JSON.stringify(userJson));
     localStorage.setItem("currentUser",userJson[totalNumber].username);
     this.loadRelationships();
+    //add 10 post for new user
     for(var i=0;i<10;i++) {
+      // new user 10 posts
       //this.addNewPost("", "");
     }
     this.changeUser(userJson[totalNumber].username);

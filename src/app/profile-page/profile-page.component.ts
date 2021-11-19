@@ -130,9 +130,9 @@ export class ProfilePageComponent implements OnInit {
       console.log("error!")
     }
   }*/
-/*  public workSpace():void{
+  public workSpace():void{
     this.router.navigateByUrl("main_page");
-  }*/
+  }
   onSubmit(formValue:any):boolean{
    /* if(this.pwd!=this.pwd2){
       this.pwd="";
